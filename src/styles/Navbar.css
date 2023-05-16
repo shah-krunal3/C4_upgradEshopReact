@@ -1,0 +1,17 @@
+.common_navbar{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.common_navbar li{
+    margin: 0 20px;
+}
+.common_navbar li a{
+    text-decoration: underline;
+    color: white;
+}
+.common_navbar button{
+    color: white;
+    background-color: red;
+}
