@@ -12,6 +12,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "../../styles/Navbar.css";
 import { Button } from "@mui/material";
 
+
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
