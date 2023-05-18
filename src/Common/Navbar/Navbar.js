@@ -12,7 +12,6 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "../../styles/Navbar.css";
 import { Button } from "@mui/material";
 
-
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -65,7 +64,11 @@ const Navbar = () => {
         <AppBar component={"nav"}>
           <Toolbar>
             <ShoppingCartIcon />
-            <Typography variant="h6" component={"div"} sx={{ flexgrow: 1 }}>
+            <Typography
+              variant="h6"
+              component={"div"}
+              sx={{ flexgrow: 1, padding: "10px" }}
+            >
               upGrad E-shop
             </Typography>
             <IconButton
@@ -99,15 +102,17 @@ const Navbar = () => {
                   <Link to={"/addproduct"}>Add Product</Link>
                 </li>
                 <Link to={"/login"}>
-                  <Button className="button" variant="contained">Login</Button>
-                  </Link>
+                  <Button className="button" variant="contained">
+                    Login
+                  </Button>
+                </Link>
               </ul>
             </Box>
           </Toolbar>
         </AppBar>
       </Box>
       <Box>
-        <Toolbar/>
+        <Toolbar />
       </Box>
     </div>
   );
