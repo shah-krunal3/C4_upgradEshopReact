@@ -8,11 +8,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { Select, FormControl, MenuItem , InputLabel} from "@mui/material";
+import { Select, FormControl, MenuItem, InputLabel } from "@mui/material";
 import "../../src/Home.css";
-import "../../Common/Navbar.js" ;
+import Navbar from "../../src/Common/Navbar/Navbar";
+import Layout from "../Common/Navbar/Layout";
 
-<Navbar/>
+<Navbar />;
 export default function MultiActionAreaCard() {
   const [alignment, setAlignment] = React.useState("web");
 
@@ -21,7 +22,9 @@ export default function MultiActionAreaCard() {
   };
 
   return (
+    <Layout>
     <>
+      <Navbar></Navbar>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <ToggleButtonGroup
           color="primary"
@@ -43,12 +46,16 @@ export default function MultiActionAreaCard() {
       {/* Move the SelectBar component here */}
       <div style={{ display: "flex", justifyContent: "flex-start" }}>
         <FormControl>
-        <InputLabel id="demo-simple-select-label" style= {{fontSize: "20px", lineHeight:"5.4375em"}}>Select...</InputLabel>
+          <InputLabel
+            id="demo-simple-select-label"
+            style={{ fontSize: "20px", lineHeight: "5.4375em" }}
+          >
+            Select...
+          </InputLabel>
           <Select
-            style={{ width: "200px", lineHeight: "0.4375em"}}
+            style={{ width: "200px", lineHeight: "0.4375em" }}
             value={alignment}
             onChange={handleChange}
-            
           >
             <MenuItem value="default">Default</MenuItem>
             <MenuItem value="hightolow">Price:High to Low</MenuItem>
@@ -285,5 +292,6 @@ export default function MultiActionAreaCard() {
         </Card>
       </div>
     </>
+    </Layout>
   );
 }
