@@ -6,22 +6,38 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import LockCloseIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // TODO: Handle login logic here
+    const response = await fetch("/auth/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      navigate("/signup");
+    } else {
+      navigate("/addProduct");
+    }
   };
   return (
     <Layout>
@@ -37,8 +53,8 @@ const Login = () => {
               <Form.Control
                 type="email"
                 placeholder="Enter email"
-                value={email}
-                onChange={handleEmailChange}
+                value={username}
+                onChange={handleUsernameChange}
               />
             </FormGroup>
             <br />
