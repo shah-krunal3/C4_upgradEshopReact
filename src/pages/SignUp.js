@@ -6,8 +6,10 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import LockCloseIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,9 +36,30 @@ const SignUp = () => {
     setContactNumber(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     // TODO: Handle login logic here
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+        contactNumber,
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      navigate("/signin");
+    } else {
+      console.log("Error in signup");
+      //navigate("/addProduct");
+    }
   };
   return (
     <Layout>
@@ -45,7 +68,7 @@ const SignUp = () => {
           <center>
             <LockCloseIcon className="rounded-icon"></LockCloseIcon>
           </center>
-          <h5 className="text-center paddingTop10"> Sign In</h5>
+          <h5 className="text-center paddingTop10"> Sign Up</h5>
           <br></br>
           <Form onSubmit={handleSubmit}>
             <FormGroup controlId="formFirstName" className="form-group">
@@ -99,7 +122,7 @@ const SignUp = () => {
               value="SIGN UP"
               className="btn-primary width100"
             >
-              SIGN IN
+              SIGN UP
             </Button>
             <br></br>
             <Link to={"/login"} className="paddingTop10">

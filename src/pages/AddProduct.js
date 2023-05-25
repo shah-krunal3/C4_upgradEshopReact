@@ -4,11 +4,14 @@ import Layout from "../Common/Navbar/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import LockCloseIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
+  const [category, setCategory] = useState("");
   const [manufacturer, setManufacturer] = useState("");
   const [availableItems, setAvailableItems] = useState("");
   const [price, setPrice] = useState("");
@@ -17,6 +20,10 @@ const AddProduct = () => {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
   };
 
   const handleManufacturerChange = (event) => {
@@ -57,6 +64,24 @@ const AddProduct = () => {
                 value={name}
                 onChange={handleNameChange}
               />
+            </FormGroup>
+            <br />
+            <FormGroup>
+              <FormControl fullWidth>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value="Furniture"
+                  label="Category"
+                  onChange={handleCategoryChange}
+                  defaultValue="Furniture"
+                >
+                  <MenuItem value="Furniture">Furniture</MenuItem>
+                  <MenuItem value="Apparel">Apparel</MenuItem>
+                  <MenuItem value="Electronics">Electronics</MenuItem>
+                  <MenuItem value="Personal Care">Personal Care</MenuItem>
+                </Select>
+              </FormControl>
             </FormGroup>
             <br />
             <FormGroup controlId="formManufacturer" className="form-group">

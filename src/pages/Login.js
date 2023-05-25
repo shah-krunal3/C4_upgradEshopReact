@@ -24,7 +24,7 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     // TODO: Handle login logic here
-    const response = await fetch("/auth/signin", {
+    const response = await fetch("/api/auth/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const Login = () => {
       const data = await response.json();
       navigate("/signup");
     } else {
-      navigate("/addProduct");
+      navigate("/home");
     }
   };
   return (
