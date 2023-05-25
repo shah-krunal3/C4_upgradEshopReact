@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useContext, useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -11,6 +12,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import "../../styles/Navbar.css";
 import { Button } from "@mui/material";
+import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   display: "flex",
@@ -58,6 +61,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
   return (
     <div>
       <Box>
@@ -98,14 +107,28 @@ const Navbar = () => {
                 <li>
                   <Link to={"/"}>Home</Link>
                 </li>
-                <li>
-                  <Link to={"/addproduct"}>Add Product</Link>
-                </li>
-                <Link to={"/login"}>
-                  <Button className="button" variant="contained">
-                    Login
+                {isLoggedIn ? (
+                  <li>
+                    <Link to={"/addproduct"}>Add Product</Link>
+                  </li>
+                ) : (
+                  ""
+                )}
+                {isLoggedIn ? (
+                  <Button
+                    className="button"
+                    variant="contained"
+                    onClick={handleLogout}
+                  >
+                    Logout
                   </Button>
-                </Link>
+                ) : (
+                  <Link to={"/login"}>
+                    <Button className="button" variant="contained">
+                      Login
+                    </Button>
+                  </Link>
+                )}
               </ul>
             </Box>
           </Toolbar>

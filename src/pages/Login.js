@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import Layout from "../Common/Navbar/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,8 +7,10 @@ import FormGroup from "@mui/material/FormGroup";
 import LockCloseIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Login = () => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -34,9 +36,10 @@ const Login = () => {
 
     if (response.ok) {
       const data = await response.json();
-      navigate("/signup");
+      login();
+      navigate("/");
     } else {
-      navigate("/home");
+      //navigate("/home");
     }
   };
   return (
