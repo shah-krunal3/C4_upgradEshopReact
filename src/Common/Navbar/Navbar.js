@@ -70,7 +70,7 @@ const Navbar = () => {
   return (
     <div>
       <Box>
-        <AppBar component={"nav"}>
+        <AppBar component={"nav"} sx={{bgcolor: "#3f51b5."}}>
           <Toolbar>
             <ShoppingCartIcon />
             <Typography
